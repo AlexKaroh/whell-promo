@@ -1,1 +1,47 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #640904;
+  font-family: 'FuturaPT-Book', sans-serif;;
+}
+
+.modal {
+  height: 100vh;
+  width: 100vw;
+  background-color: #0000007e;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  z-index: 10;
+  pointer-events: none;
+  transition: 0.3s;
+  z-index: -1;
+}
+
+.modal.activated {
+  opacity: 1;
+  z-index: 99999999999;
+  pointer-events: all;
+}
+
+.modal-content {
+  transform: scale(0);
+  transition: 0.3s;
+  padding: 5rem;
+  width: 100%;
+  flex: none;
+  border-radius: 0.25rem;
+  z-index: 4;
+}
+
+.modal-content.activated {
+  transform: scale(1);
+}
