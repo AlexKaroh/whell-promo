@@ -11,7 +11,11 @@
     <div class="perf-1">
       <img src="assets/11.png" class="img-fluid" alt="" style="max-width: 280px; width: 100%; height: auto;">
     </div>
-    <button class="accent-btn">Крутить колесо</button>
+    <a style="width: 100%;" href="#roulette-section">
+    <button class="accent-btn">
+      Крутить колесо
+    </button>
+    </a>
     <div class="perf-2">
       <img src="assets/22.png" class="img-fluid" alt="" style="max-width: 280px; width: 100%; height: auto;">
   </div>
@@ -57,12 +61,14 @@
     </ul>
     </div>
     <div class="wheel">
-      <div [class.spin]="flag" class="whell-circle"></div>
-      <button (click)="spin()">ПУСК</button>
+      <div id="roulette-section" [class.spin]="flag" class="whell-circle"></div>
+      <button id="spn" (click)="spin()">ПУСК</button>
 
       <div class="arrow"></div>
     </div>
   </div>
+
+  <button (click)="activateModal('Info')" class="go-btn">Подобрать модель</button>
 
   <div class="benefits">
     <div class="title sub">
@@ -108,7 +114,7 @@
 
   <footer>
     <p style="font-size: 16px; margin-bottom: 16px; margin-top: 8px;">Время работы: пн-вс 09.00-21.00</p>
-    <p style="font-size: 16px;">ООО «ДИП МОЛЛ» УНП: 193782799</p>
+    <p style="font-size: 16px;">ООО «ФАСТВОРК» УНП: 193782799</p>
     <p style="font-size: 16px; margin-bottom: 16px;">220055, г. Минск, ул. Каменногорская, д. 47, оф. 45</p>
     <p style="font-size: 16px; font-weight: 500;">Акция действует на всей территории Беларуси</p>
     <p style="font-size: 16px;">Телефон: +375291477799</p>

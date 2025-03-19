@@ -1,9 +1,10 @@
 import { NgFor, NgIf } from '@angular/common';
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { StopPropagationDirective } from './stop-propaginaton.directive';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PhoneMaskDirective } from './phone-mask.directive';
 import { WebhookService } from './webhook.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,7 @@ import { WebhookService } from './webhook.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   dealName = 'НОУТБУКИ'
 
   itemsArray = Array(8).fill(
@@ -20,6 +21,7 @@ export class AppComponent {
   );
   isModalActive = false;
   flag = false;
+  isConfirm = false;
 
   public PopupMode?: "Info" | "Prize" | "doc1" | "doc2" | "doc3" | "doc4";
 
@@ -43,7 +45,15 @@ export class AppComponent {
     Validators.required
   ]);
 
-  constructor (private cdf: ChangeDetectorRef, private webhookService: WebhookService) {}
+  constructor (private cdf: ChangeDetectorRef, private webhookService: WebhookService, private router: Router) {}
+
+  ngOnInit(): void {
+    if(localStorage.getItem('isConfirm')) {
+      this.activateModal('doc4');
+      localStorage.removeItem('isConfirm');
+    }
+  }
+
   activateModal(popupMode: "Info" | "Prize" | "doc1" | "doc2" | "doc3" | "doc4") {
     this.PopupMode = popupMode;
     this.nameControl.reset();
@@ -86,6 +96,7 @@ export class AppComponent {
     else
     this.cdf.detectChanges();
 
+
     const data = {
       name: this.nameControl.value,
       deal_name: this.dealName,
@@ -98,7 +109,8 @@ export class AppComponent {
     this.webhookService.sendWebhook(data);
 
     setTimeout(() => {
-      this.activateModal('doc4');
+      localStorage.setItem('isConfirm', '1');
+      window.location.href = '/thanks';
     })
   }
 }

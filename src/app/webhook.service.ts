@@ -10,16 +10,33 @@ export class WebhookService {
 
   constructor(private http: HttpClient) {}
 
+  // sendWebhook(data: any) {
+  //   console.log(data);
+  //   const params = new HttpParams({
+  //     fromObject: {
+  //       'Название сделки': data.deal_name,
+  //       'Номер телефона': data.phone_number,
+  //       'Сумма платежа': data.monthly_amount,
+
+  //       'Имя': data.name,
+  //       'Срок рассрочки': data.installment_period,
+  //     },
+  //   });
+  //   return this.http.get(this.webhookUrl, { params }).pipe(take(1)).subscribe({
+  //     next: (response) => console.log('✅ Успех:', response),
+  //     error: (err) => console.error('❌ Ошибка:', err),
+  //   });
+  // }
+
   sendWebhook(data: any) {
     console.log(data);
     const params = new HttpParams({
       fromObject: {
         'Название сделки': data.deal_name,
         'Номер телефона': data.phone_number,
-        'Сумма платежа': data.monthly_amount,
-
         'Имя': data.name,
-        'Срок рассрочки': data.installment_period,
+
+        'quiz': `${data.monthly_amount} ${data.installment_period}`,
       },
     });
     return this.http.get(this.webhookUrl, { params }).pipe(take(1)).subscribe({
